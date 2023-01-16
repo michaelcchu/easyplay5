@@ -33,81 +33,95 @@
 
 <span class="column">
 <h1>EasyPlay5</h1>
-<span id="columns">
-    <section>
-        <h2>Preliminary</h2>
-        <div>
-            tuning: 
-            <input id="tuningNote" value="a4" size="4"> 
-            = 
-            <input id="tuningFrequency" value="440" size="7">
-        </div>
-        <div>
-            gain: 
-            <input id="gain" value="0.15" size="4">
-        </div>
-    </section>
-    <section>
-        <h2>Input</h2>
-        <div>
-            <input type="radio" id="notesRadio" name="inputMethod" checked>
-            notes: 
-            <input id="notes" value="f3 f c4 c d d c b&3 b& a a g f## f">
-        </div>
-        <div>
-            <input type="radio" id="fileRadio" name="inputMethod">
-            file: 
-            <input id="fileInput" type="file" accept=".mid,.midi">
-            track: 
-            <select id="track"></select>
-        </div>
-    </section>
-    <section>
-        <h2>Menu</h2>
-        <div>
-            basic: 
-            <button id="start">start</button> 
-            <button id="pause">pause</button>
-            <button id="resume">resume</button>
-        </div>
-        <div>
-            move:
-            <button id="backwards">backwards</button>
-            <button id="forwards">forwards</button>
-            distance: 
-            <input id="distance" value="1" size="5">
-        </div>
-        <div>
-            edit: 
-            <button id="del">delete</button>
-            <button id="insert" disabled>insert</button>
-            note:
-            <input id="note" value="g5" size="4" disabled>
-        </div>
-        <div>
-            save: 
-            <button id="save" disabled>save</button>
-        </div>
-        <div>
-            help: 
-            <button id="help">help</button>
-        </div>
-    </section>
-    <section>
-        <h2>Display</h2>
-        <div>
-            state: 
-            <output id="state">
-        </div>
-        <div>
-            playing: 
-            <output id="simpleDisplay">
-        </div>
-        <div>
-            <textarea id="display" readonly></textarea>
-        </div>
-    </section>
-</span>
+    <!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Preliminary')">
+        Preliminary
+    </button>
+    <button class="tablinks" onclick="openCity(event, 'Input')">
+        Input
+    </button>
+    <button class="tablinks" onclick="openCity(event, 'Menu')" id="defaultOpen">
+        Menu
+    </button>
+  </div>
+  
+  <!-- Tab content -->
+  <div id="Preliminary" class="tabcontent">
+    <h2>Preliminary</h2>
+    <div>
+        tuning: 
+        <input id="tuningNote" value="a4" size="4"> 
+        = 
+        <input id="tuningFrequency" value="440" size="7">
+    </div>
+    <div>
+        gain: 
+        <input id="gain" value="0.15" size="4">
+    </div>
+  </div>
+  
+  <div id="Input" class="tabcontent">
+    <h2>Input</h2>
+    <div>
+        <input type="radio" id="notesRadio" name="inputMethod" checked>
+        notes: 
+        <input id="notes" value="f3 f c4 c d d c b&3 b& a a g f## f">
+    </div>
+    <div>
+        <input type="radio" id="fileRadio" name="inputMethod">
+        file: 
+        <input id="fileInput" type="file" accept=".mid,.midi">
+        track: 
+        <select id="track"></select>
+    </div>
+  </div>
+  
+  <div id="Menu" class="tabcontent">
+    <h2>Menu</h2>
+    <div>
+        basic: 
+        <button id="start">start</button> 
+        <button id="pause">pause</button>
+        <button id="resume">resume</button>
+    </div>
+    <div>
+        move:
+        <button id="backwards">backwards</button>
+        <button id="forwards">forwards</button>
+        distance: 
+        <input id="distance" value="1" size="5">
+    </div>
+    <div>
+        edit: 
+        <button id="del">delete</button>
+        <button id="insert" disabled>insert</button>
+        note:
+        <input id="note" value="g5" size="4" disabled>
+    </div>
+    <div>
+        save: 
+        <button id="save" disabled>save</button>
+    </div>
+    <div>
+        help: 
+        <button id="help">help</button>
+    </div>
+</div>
+<section>
+    <h2>Display</h2>
+    <div>
+        state: 
+        <output id="state">
+    </div>
+    <div>
+        playing: 
+        <output id="simpleDisplay">
+    </div>
+    <div>
+        <textarea id="display" readonly></textarea>
+    </div>
+</section>
 </span>
 </span>
 
