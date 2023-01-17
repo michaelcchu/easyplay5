@@ -21,7 +21,7 @@ oscillator.connect(gainNode).connect(audioContext.destination); resetVars();
 function startGame() {
     myGameArea.start();
     pointer = new component(5, 128 * 5, "red", myGameArea.canvas.width/2, 0, 
-    0); 
+    0);
 }
 
 function updateGameArea() {
