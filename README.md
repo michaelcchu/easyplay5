@@ -1,4 +1,4 @@
-# easyplay2
+# easyplay5
 
 play music by pressing keys on the keyboard (or tapping the screen).
 
@@ -35,7 +35,7 @@ we imagine that in the future, most people will play music with tapper-like prog
 
 what next?
 
-try the [website](https://mcchu.com/easyplay/) and/or see [demonstrations](https://www.youtube.com/playlist?list=PLB1dz46HEVoSqZvxaY-xkh17CvYgUGq3F); it can be fun! :)
+try the [website](https://mcchu.com/easyplay5/) and/or see [demonstrations](https://www.youtube.com/playlist?list=PLB1dz46HEVoSqZvxaY-xkh17CvYgUGq3F); it can be fun! :)
 
 similar to:
 
