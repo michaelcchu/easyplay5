@@ -38,7 +38,7 @@ function updateGameArea() {
 let myGameArea = {
     canvas: document.getElementById("canvas"),
     start: function() {
-      this.canvas.width = 128; // todo: may want to amke this adjustable?
+      this.canvas.width = 40 * noteWidth;
       this.canvas.height = 128 * noteHeight;
       this.context = this.canvas.getContext("2d");
       this.context.globalAlpha = 0.5;
