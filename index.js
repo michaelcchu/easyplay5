@@ -21,7 +21,7 @@ oscillator.connect(gainNode).connect(audioContext.destination); resetVars();
 
 function startGame() {
     myGameArea.start();
-    pointer = new component(5, 128 * 5, "blue", myGameArea.canvas.width/2, 0, 
+    pointer = new component(5, 128 * 5, "red", myGameArea.canvas.width/2, 0, 
     0); 
 }
 
@@ -113,7 +113,7 @@ function convertNotesToFrequencies() {
         display.value += " ".repeat(indent) + "." + " ".repeat(128-indent-1) 
             + note.text + " ".repeat(4 - note.text.length) + "\n" + emptyLine;        
         if (i < notes.length - 1) {display.value += "\n";}
-        gamePieces.push(new component(5, 5, "red", myGameArea.canvas.width/2 + 
+        gamePieces.push(new component(5, 5, "blue", myGameArea.canvas.width/2 + 
         5 + i * 10, (127 - indent) * 5, i));
     } 
     adjustDisplay(); display.scrollTop = 0;
