@@ -1,6 +1,5 @@
 const audioContext = new AudioContext();
 const badKeys = ["Alt","Arrow","Audio","Enter","Launch","Meta","Play","Tab"];
-const display = byId("display");
 const emptyLine = " ".repeat(128 + 4);
 const fileInput = byId("fileInput");
 const gainNode = new GainNode(audioContext);
@@ -67,18 +66,8 @@ function component(width, height, color, x, y, position) {
 startGame();
 
 function adjustDisplay() {
-    function goTo() {
-        display.blur();
-        display.selectionStart = display.selectionEnd = start + indents[index];
-        display.blur(); display.focus();
-        display.selectionStart = start + indents[index];
-        display.selectionEnd = start + indents[index] + 1;
-    }
-    let start = (index * 2) * width; goTo();
     if (activePress !== null) {
         document.getElementById("simpleDisplay").value = notes[index];
-        start += width; 
-        goTo();
         for (gamePiece of gamePieces) {
             gamePiece.x = myGameArea.canvas.width/2 + (gamePiece.position - 
                 index) * 10;
@@ -90,7 +79,6 @@ function adjustDisplay() {
                 index) * 10;
         }
     }
-
     updateGameArea();
 }
 
@@ -110,13 +98,10 @@ function convertNotesToFrequencies() {
         frequencies.push(toFreq(note));
         const indent = note.pitch + (note.octave + 1) * 12;
         indents.push(indent);
-        display.value += " ".repeat(indent) + "." + " ".repeat(128-indent-1) 
-            + note.text + " ".repeat(4 - note.text.length) + "\n" + emptyLine;        
-        if (i < notes.length - 1) {display.value += "\n";}
         gamePieces.push(new component(5, 5, "blue", myGameArea.canvas.width/2 + 
         5 + i * 10, (127 - indent) * 5, i));
     } 
-    adjustDisplay(); display.scrollTop = 0;
+    adjustDisplay();
 }
 
 function down(e) {
@@ -148,7 +133,7 @@ function del() {
     (2) notes list (text e.g. "a&5")
     (3) frequencies list (numbers e.g. "378.15")
     (4) indents list (midi numbers)
-    (5) the display (a big block of text)
+    (5) the display (TODO)
     */
 
     // (1)
@@ -161,10 +146,6 @@ function del() {
     indents.splice(index, 1); // (4)
 
     // (5)
-    const start = (index * 2) * width
-    let text = display.value.substring(0, start);
-    text += display.value.substring(start + 2 * width);
-    display.value = text;
 }
 
 function format(x) {return x.trim().toLowerCase();}
@@ -180,7 +161,7 @@ function insert() {
     (2) notes list (text e.g. "a&5")
     (3) frequencies list (numbers e.g. "378.15")
     (4) indents list (midi numbers)
-    (5) the display (a big block of text)
+    (5) the display (TODO)
     */
 
     const note = unbundle(byId("note"));
@@ -195,10 +176,7 @@ function insert() {
     indents.splice(index, 0, ); // (4)
 
     // (5)
-    const start = (index * 2) * width
-    let text = display.value.substring(0, start);
-    text += display.value.substring(start + 2 * width);
-    display.value = text;
+    
 }
 
 function key(e) { 
@@ -238,7 +216,6 @@ function resetVars() {
     if (proposedGain <= 1 && proposedGain >= 0) {normalGain = proposedGain;} 
     else {normalGain = 0.15;}
     gainNode.gain.value = 0;
-    display.value = emptyLine + "\n"; 
     gamePieces = [];
     document.getElementById("simpleDisplay").value = "";
 }
@@ -269,9 +246,6 @@ function up(e) {
     }
 }
 
-display.addEventListener("keydown", (e) => {
-    if (["Space","ArrowUp","ArrowDown"].includes(e.key)) {e.preventDefault();}
-});
 fileInput.addEventListener("change", () => {
     const file = fileInput.files[0]; if (file) {reader.readAsArrayBuffer(file);}
 });
