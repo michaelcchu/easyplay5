@@ -7,7 +7,6 @@ const oscillator = new OscillatorNode(audioContext, {frequency: 0});
 const reader = new FileReader();
 const select = byId("track");
 const value = {"c":0,"d":2,"e":4,"f":5,"g":7,"a":9,"b":11,"#":1,"&":-1};
-const width = 128 + 4 + 1;
 
 let activePress; let frequencies; let index; let indents; let midi; 
 let normalGain; let notes; let octave; let on = false; let paused; let press; 
@@ -16,12 +15,16 @@ let track; let tuning;
 let gamePieces;
 let pointer;
 
+const noteWidth = 8;
+const noteHeight = 4;
+
+
 oscillator.connect(gainNode).connect(audioContext.destination); resetVars();
 
 function startGame() {
     myGameArea.start();
-    pointer = new component(5, 128 * 5, "red", myGameArea.canvas.width/2, 0, 
-    0);
+    pointer = new component(noteWidth, 128 * noteHeight, "red", 
+    myGameArea.canvas.width/2, 0, 0);
 }
 
 function updateGameArea() {
@@ -35,8 +38,8 @@ function updateGameArea() {
 let myGameArea = {
     canvas: document.getElementById("canvas"),
     start: function() {
-      this.canvas.width = 480;
-      this.canvas.height = 128 * 5;
+      this.canvas.width = 128; // todo: may want to amke this adjustable?
+      this.canvas.height = 128 * noteHeight;
       this.context = this.canvas.getContext("2d");
       this.context.globalAlpha = 0.5;
     },
@@ -69,14 +72,14 @@ function adjustDisplay() {
     if (activePress !== null) {
         document.getElementById("simpleDisplay").value = notes[index];
         for (gamePiece of gamePieces) {
-            gamePiece.x = myGameArea.canvas.width/2 + (gamePiece.position - 
-                index) * 10;
+            gamePiece.x = myGameArea.canvas.width/2 + 
+                (gamePiece.position - index) * noteWidth * 2;
         }
     } else {
         document.getElementById("simpleDisplay").value = "";
         for (gamePiece of gamePieces) {
-            gamePiece.x = myGameArea.canvas.width/2 + 5 + (gamePiece.position - 
-                index) * 10;
+            gamePiece.x = myGameArea.canvas.width/2 + noteWidth + 
+                (gamePiece.position - index) * noteWidth * 2;
         }
     }
     updateGameArea();
@@ -98,8 +101,9 @@ function convertNotesToFrequencies() {
         frequencies.push(toFreq(note));
         const indent = note.pitch + (note.octave + 1) * 12;
         indents.push(indent);
-        gamePieces.push(new component(5, 5, "blue", myGameArea.canvas.width/2 + 
-        5 + i * 10, (127 - indent) * 5, i));
+        gamePieces.push(new component(noteWidth, noteHeight, "blue", 
+            myGameArea.canvas.width/2 + noteWidth + i * noteWidth * 2, 
+            (127 - indent) * noteHeight, i));
     } 
     adjustDisplay();
 }
@@ -121,8 +125,8 @@ function down(e) {
         adjustDisplay();
         index++;
     } else if (strPress.includes("Arrow") && (activePress === null)) {
-        if (strPress.includes("Up")) { move(-1,1); }
-        else if (strPress.includes("Down")) { move(1,1); }
+        if (strPress.includes("Left")) { move(-1,1); }
+        else if (strPress.includes("Right")) { move(1,1); }
     }
 }
 
